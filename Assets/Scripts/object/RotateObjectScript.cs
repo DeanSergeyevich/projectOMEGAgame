@@ -11,7 +11,7 @@ public class RotateObjectScript : MonoBehaviour
     void Update()
     {
         // Проверка удерживания правой кнопки мыши
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && heldObject != null)
         {
             if (!isRightMouseButtonDown)
             {
@@ -22,6 +22,7 @@ public class RotateObjectScript : MonoBehaviour
                 // Если у нас есть heldObject, центрируем его перед камерой
                 if (heldObject != null)
                 {
+                    heldObject.GetComponent<Rigidbody>().useGravity = false;
                     Vector3 playerPosition = Camera.main.transform.position + Camera.main.transform.forward * 2.0f;
                     heldObject.transform.position = playerPosition;
                 }
@@ -50,6 +51,7 @@ public class RotateObjectScript : MonoBehaviour
             isRightMouseButtonDown = false;
             Time.timeScale = 1f;
             isGamePaused = false;
+           // heldObject = null;
         }
     }
 

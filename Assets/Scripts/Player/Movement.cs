@@ -110,7 +110,7 @@ public class Movement : MonoBehaviour
 
         if (isGrounded! && controller.velocity.y < -1f)
         {
-            velocityY = -8f;
+            velocityY = -8f * Time.deltaTime;
         }
     }
 
@@ -124,29 +124,32 @@ public class Movement : MonoBehaviour
         {
             isRunning = true;
             stamina.playerStamina -= 0.5f;
+         
         }
         // Если игрок перестает бежать или выносливость равна 0, останавливаем бег.
         else if ((!runInput || stamina.playerStamina <= 0 || isCrouching) && isRunning)
         {
             isRunning = false;
+            
         }
 
         // Если isRunning равно true, отнимаем определенное значение из playerStamina в staminaEnergy.
-        if (isRunning )
+        if (isRunning)
         {
             stamina.playerStamina -= 0.1f;
+            Speed = 2f; // Делает в итоге скорость 2
         }
 
         // Реализация задержки перед началом восстановления выносливости с использованием корутины.
         if (!runInput && !isRunning && stamina.playerStamina < stamina.maxStamina)
         {
             stamina.playerStamina += 0.1f;
-
+            Speed = 5f; // При восстановлении  выравнивается нормальная скорость 5f
         }
 
         if (runInput && isCrouching && stamina.playerStamina < stamina.maxStamina)
         {
-            stamina.playerStamina += 0.1f;
+            stamina.playerStamina +=  0.1f;
         }
 
         // Ограничьте выносливость максимальным значением и минимальным значением 0.

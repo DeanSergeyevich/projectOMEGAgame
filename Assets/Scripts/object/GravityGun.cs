@@ -6,7 +6,7 @@ public class GravityGun : MonoBehaviour
     private Transform attractor;
     public float pickupDistance = 1.0f;
 
-    private bool isRightMouseButtonDown = false;
+   // private bool isRightMouseButtonDown = false;
     private Vector3 initialCameraPosition;
     private Quaternion initialCameraRotation;
 
@@ -40,7 +40,7 @@ public class GravityGun : MonoBehaviour
                     {
                         heldObject = hit.collider.gameObject;
                         heldObject.GetComponent<Rigidbody>().useGravity = false;
-
+                        
                         // Передаем ссылку на heldObject скрипту RotateObjectScript
                         rotateObjectScript.SetHeldObject(heldObject);
                     }
@@ -54,6 +54,7 @@ public class GravityGun : MonoBehaviour
                 // Передаем ссылку на heldObject скрипту RotateObjectScript (нулевую ссылку)
                 rotateObjectScript.SetHeldObject(null);
             }
+            
         }
 
         if (Input.GetMouseButtonDown(2) && heldObject != null)
@@ -62,6 +63,9 @@ public class GravityGun : MonoBehaviour
             rb.velocity = Camera.main.transform.forward * 10f;
             heldObject.GetComponent<Rigidbody>().useGravity = true;
             heldObject = null;
+
+            // Передаем ссылку на heldObject скрипту RotateObjectScript (нулевую ссылку)
+            rotateObjectScript.SetHeldObject(null);
         }
 
         if (heldObject != null)
