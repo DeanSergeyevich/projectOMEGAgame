@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -753,6 +753,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cad592a8c48b064fb74ba13d5708476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &407972582
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407972566}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ea67fd74f3bd4448b4f2d414d9c9bce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &409863214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1342,6 +1363,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1343337812540393710, guid: 5a90c4e58e39b8c428766a98f67ae346,
+        type: 3}
+      propertyPath: m_Height
+      value: 2.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3209067197087208527, guid: 5a90c4e58e39b8c428766a98f67ae346,
         type: 3}
       propertyPath: m_IsActive
@@ -1351,6 +1377,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6383553307205067585, guid: 5a90c4e58e39b8c428766a98f67ae346,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.250902
+      objectReference: {fileID: 0}
+    - target: {fileID: 6383553307205067585, guid: 5a90c4e58e39b8c428766a98f67ae346,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.250902
+      objectReference: {fileID: 0}
+    - target: {fileID: 6383553307205067585, guid: 5a90c4e58e39b8c428766a98f67ae346,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.250902
       objectReference: {fileID: 0}
     - target: {fileID: 6383553307205067585, guid: 5a90c4e58e39b8c428766a98f67ae346,
         type: 3}
@@ -1501,6 +1542,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 6
       addedObject: {fileID: 407972570}
+    - targetCorrespondingSourceObject: {fileID: 7342457470437464797, guid: 5a90c4e58e39b8c428766a98f67ae346,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 407972582}
   m_SourcePrefab: {fileID: 100100000, guid: 5a90c4e58e39b8c428766a98f67ae346, type: 3}
 --- !u!1 &960043805
 GameObject:

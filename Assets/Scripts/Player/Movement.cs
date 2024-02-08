@@ -25,9 +25,10 @@ public class Movement : MonoBehaviour
     public float standingHeight = 2f;
     public float crouchingHeight = 1f;
     private bool isCrouching = false;
+    Animator animator;
 
-    [Header("Плавность приседания")]
-    [SerializeField] float crouchSmoothSpeed = 2f; // Скорость изменения высоты при приседании
+    //[Header("Плавность приседания")]
+    //[SerializeField] float crouchSmoothSpeed = 2f; // Скорость изменения высоты при приседании
 
 
     [Header("Stamina")]
@@ -58,6 +59,9 @@ public class Movement : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = true;
         }
+
+        animator = GetComponent<Animator>();
+
     }
 
     void Update()
@@ -160,44 +164,35 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            // Запустить корутину для изменения высоты (плавное приседание или подъем)
-            StartCoroutine(ChangeHeight(isCrouching ? standingHeight : crouchingHeight));
-            // Инвертировать состояние приседания
             isCrouching = !isCrouching;
-
-            if (isCrouching)
-            {
-                Speed = 3.0f;
-            }
-            else
-                Speed = 5.0f;
+            animator.SetBool("IsCrouching", isCrouching);
         }
     }
-    IEnumerator ChangeHeight(float targetHeight)
-    {
-        // Сохранить начальную высоту объекта
-        float initialHeight = transform.localScale.y;
+    //IEnumerator ChangeHeight(float targetHeight)
+    //{
+    //    // Сохранить начальную высоту объекта
+    //    float initialHeight = transform.localScale.y;
 
-        // Инициализировать переменную для отслеживания прошедшего времени
-        float t = 0f;
+    //    // Инициализировать переменную для отслеживания прошедшего времени
+    //    float t = 0f;
 
-        // Цикл, который будет выполняться, пока не достигнута целевая высота
-        while (t < 1f)
-        {
-            // Увеличиваем переменную t с учетом скорости изменения высоты
-            t += Time.deltaTime * crouchSmoothSpeed;
+    //    // Цикл, который будет выполняться, пока не достигнута целевая высота
+    //    while (t < 1f)
+    //    {
+    //        // Увеличиваем переменную t с учетом скорости изменения высоты
+    //        t += Time.deltaTime * crouchSmoothSpeed;
 
-            // Вычислить новую высоту с использованием функции Lerp
-            float newHeight = Mathf.Lerp(initialHeight, targetHeight, t);
+    //        // Вычислить новую высоту с использованием функции Lerp
+    //        float newHeight = Mathf.Lerp(initialHeight, targetHeight, t);
 
-            // Установить новое значение высоты объекта
-            transform.localScale = new Vector3(transform.localScale.x, newHeight, transform.localScale.z);
+    //        // Установить новое значение высоты объекта
+    //        transform.localScale = new Vector3(transform.localScale.x, newHeight, transform.localScale.z);
 
-            // Подождать до следующего кадра для достижения плавности
-            yield return null;
-        }
+    //        // Подождать до следующего кадра для достижения плавности
+    //        yield return null;
+    //    }
 
-        // Установить окончательное значение высоты объекта
-        transform.localScale = new Vector3(transform.localScale.x, targetHeight, transform.localScale.z);
-    }
+    //    // Установить окончательное значение высоты объекта
+    //    transform.localScale = new Vector3(transform.localScale.x, targetHeight, transform.localScale.z);
+    //}
 }
