@@ -55,7 +55,7 @@ public class RotateObjectScript : MonoBehaviour
         }
     }
 
-    // ����� ��� ��������� heldObject ����� (GravityGun)
+    // ����� ��� ��������� heldObject! ����� (GravityGun)
     public void SetHeldObject(GameObject newHeldObject)
     {
         heldObject = newHeldObject;
