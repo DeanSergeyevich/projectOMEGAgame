@@ -6,20 +6,20 @@ public class RotateObjectScript : MonoBehaviour
     private bool isRightMouseButtonDown = false;
     private Vector3 initialCameraPosition;
     private Quaternion initialCameraRotation;
-    private bool isGamePaused = false; // Флаг, чтобы определить, заморожена ли игра
+    private bool isGamePaused = false; // пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
 
     void Update()
     {
-        // Проверка удерживания правой кнопки мыши
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         if (Input.GetMouseButton(1) && heldObject != null)
         {
             if (!isRightMouseButtonDown)
             {
-                // Если кнопка только что была нажата, сохраняем начальное положение и ориентацию камеры
+                // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                 initialCameraPosition = Camera.main.transform.position;
                 initialCameraRotation = Camera.main.transform.rotation;
 
-                // Если у нас есть heldObject, центрируем его перед камерой
+                // пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ heldObject, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 if (heldObject != null)
                 {
                     heldObject.GetComponent<Rigidbody>().useGravity = false;
@@ -27,7 +27,7 @@ public class RotateObjectScript : MonoBehaviour
                     heldObject.transform.position = playerPosition;
                 }
 
-                // Замораживаем игру
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 Time.timeScale = isGamePaused ? 1f : 0f;
                 isGamePaused = !isGamePaused;
             }
@@ -36,18 +36,18 @@ public class RotateObjectScript : MonoBehaviour
 
             if (heldObject != null)
             {
-                // Вращаем только объект, не влияя на положение камеры
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                 float rotationSpeed = 5f;
                 float mouseX = Input.GetAxis("Mouse X");
                 float mouseY = Input.GetAxis("Mouse Y");
 
-                heldObject.transform.Rotate(Vector3.up * mouseX * rotationSpeed, Space.World);
-                heldObject.transform.Rotate(Vector3.left * mouseY * rotationSpeed, Space.World);
+                heldObject.transform.Rotate(Vector3.up * -mouseX * rotationSpeed, Space.World);
+                heldObject.transform.Rotate(Vector3.left * -mouseY * rotationSpeed, Space.World);
             }
         }
-        else
+        else if(isRightMouseButtonDown)
         {
-            // Если кнопка отпущена, сбрасываем флаг и возобновляем игру
+            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
             isRightMouseButtonDown = false;
             Time.timeScale = 1f;
             isGamePaused = false;
@@ -55,7 +55,7 @@ public class RotateObjectScript : MonoBehaviour
         }
     }
 
-    // Метод для установки heldObject извне (GravityGun)
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ heldObject пїЅпїЅпїЅпїЅпїЅ (GravityGun)
     public void SetHeldObject(GameObject newHeldObject)
     {
         heldObject = newHeldObject;

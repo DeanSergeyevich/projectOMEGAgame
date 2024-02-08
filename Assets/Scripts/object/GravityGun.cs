@@ -10,7 +10,7 @@ public class GravityGun : MonoBehaviour
     private Vector3 initialCameraPosition;
     private Quaternion initialCameraRotation;
 
-    // Добавим переменную для передачи ссылки на heldObject
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ heldObject
     private RotateObjectScript rotateObjectScript;
 
 
@@ -21,7 +21,7 @@ public class GravityGun : MonoBehaviour
         initialCameraPosition = Camera.main.transform.position;
         initialCameraRotation = Camera.main.transform.rotation;
 
-        // Ищем компонент RotateObjectScript на том же объекте
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ RotateObjectScript пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         rotateObjectScript = GetComponent<RotateObjectScript>();
     }
 
@@ -41,7 +41,7 @@ public class GravityGun : MonoBehaviour
                         heldObject = hit.collider.gameObject;
                         heldObject.GetComponent<Rigidbody>().useGravity = false;
                         
-                        // Передаем ссылку на heldObject скрипту RotateObjectScript
+                        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ heldObject пїЅпїЅпїЅпїЅпїЅпїЅпїЅ RotateObjectScript
                         rotateObjectScript.SetHeldObject(heldObject);
                     }
                 }
@@ -51,7 +51,7 @@ public class GravityGun : MonoBehaviour
                 heldObject.GetComponent<Rigidbody>().useGravity = true;
                 heldObject = null;
 
-                // Передаем ссылку на heldObject скрипту RotateObjectScript (нулевую ссылку)
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ heldObject пїЅпїЅпїЅпїЅпїЅпїЅпїЅ RotateObjectScript (пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
                 rotateObjectScript.SetHeldObject(null);
             }
             
@@ -64,7 +64,7 @@ public class GravityGun : MonoBehaviour
             heldObject.GetComponent<Rigidbody>().useGravity = true;
             heldObject = null;
 
-            // Передаем ссылку на heldObject скрипту RotateObjectScript (нулевую ссылку)
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ heldObject пїЅпїЅпїЅпїЅпїЅпїЅпїЅ RotateObjectScript (пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
             rotateObjectScript.SetHeldObject(null);
         }
 

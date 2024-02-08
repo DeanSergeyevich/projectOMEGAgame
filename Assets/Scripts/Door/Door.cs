@@ -28,28 +28,32 @@ public class Door : MonoBehaviour
 
     public void CheckInteractionDistance()
     {
-        // Позиция начала луча (в данном случае, позиция игрока)
-        Vector3 rayOrigin = playerCamera.transform.position;
-
-        // Направление луча (например, вперед от игрока)
-        Vector3 rayDirection = playerCamera.transform.forward;
-
-        // Создаем луч
-        Ray ray = new Ray(rayOrigin, rayDirection);
-
-        // Переменная для хранения информации о столкновении с объектом
-        RaycastHit hit;
-
-        // Проводим луч и проверяем, есть ли столкновение с объектом
-        if (Physics.Raycast(ray, out hit, interactionDistance))
+        if (Input.GetMouseButtonDown(0))
         {
-            // Проверяем, столкнулись ли с дверью
-            if (hit.collider.gameObject == gameObject && Input.GetMouseButtonDown(0))
+            // Позиция начала луча (в данном случае, позиция игрока)
+            Vector3 rayOrigin = playerCamera.transform.position;
+
+            // Направление луча (например, вперед от игрока)
+            Vector3 rayDirection = playerCamera.transform.forward;
+
+            // Создаем луч
+            Ray ray = new Ray(rayOrigin, rayDirection);
+            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactionDistance, Color.yellow);
+
+            // Переменная для хранения информации о столкновении с объектом
+            RaycastHit hit;
+
+            // Проводим луч и проверяем, есть ли столкновение с объектом
+            if (Physics.Raycast(ray, out hit, interactionDistance))
             {
-                // Взаимодействие с дверью, так как игрок находится в нужной близости
-                isInteracting = true;
+                // Проверяем, столкнулись ли с дверью
+                if (hit.collider.gameObject == gameObject && Input.GetMouseButtonDown(0))
+                {
+                    // Взаимодействие с дверью, так как игрок находится в нужной близости
+                    isInteracting = true;
+                }
             }
-        }
+        } 
     }
 
     public void InteractDoor()

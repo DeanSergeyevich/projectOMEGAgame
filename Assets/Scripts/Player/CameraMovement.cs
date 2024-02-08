@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
     public Transform playerBody;
-    public float mouseSensitivity = 100f;
+    public Slider slider;
+    [SerializeField][Range(0.0f, 500f)] float mouseSensitivity = 100f;
 
     private float cameraCap = 0f;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        slider.value = mouseSensitivity;
     }
 
     void Update()
@@ -24,5 +28,10 @@ public class CameraMovement : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(cameraCap, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
+    }
+
+    public void Sensety(float slider)
+    {
+        mouseSensitivity = slider;
     }
 }
