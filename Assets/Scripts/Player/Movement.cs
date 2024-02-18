@@ -166,6 +166,11 @@ public class Movement : MonoBehaviour
         {
             isCrouching = !isCrouching;
             animator.SetBool("IsCrouching", isCrouching);
+            Speed = 3f;
+        }
+        else if (!isCrouching)
+        {
+            Speed = 5f;
         }
     }
     //IEnumerator ChangeHeight(float targetHeight)
