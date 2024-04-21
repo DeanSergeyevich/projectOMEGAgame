@@ -13,19 +13,19 @@ public class Movement : MonoBehaviour
     [SerializeField] bool cursorLock = true;
 
     [Header("Movement")]
-    [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
-    [SerializeField] float Speed = 5.0f;
-    [SerializeField] float gravity = -30f;
-    [SerializeField] float jumpHeight = 6f;
-    [SerializeField] float runSpeed = 5f;
-    [SerializeField] Transform groundCheck;
-    [SerializeField] LayerMask ground;
+    [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f; // Время сглаживания движения
+    [SerializeField] float Speed = 5.0f; // Базовая скорость перемещения
+    [SerializeField] float gravity = -30f; // Гравитация
+    [SerializeField] float jumpHeight = 6f; // Высота прыжка
+    [SerializeField] float runSpeed = 5f; // Скорость бега
+    [SerializeField] Transform groundCheck;  // Точка для проверки земли
+    [SerializeField] LayerMask ground; // Слой земли
 
     [Header("Crouch")]
-    public float standingHeight = 2f;
-    public float crouchingHeight = 1f;
-    private bool isCrouching = false;
-    Animator animator;
+    public float standingHeight = 2f; // Высота в стоячем положении
+    public float crouchingHeight = 1f; // Высота в приседающем положении
+    private bool isCrouching = false; // Флаг приседания
+    Animator animator; 
 
     //[Header("Плавность приседания")]
     //[SerializeField] float crouchSmoothSpeed = 2f; // Скорость изменения высоты при приседании
@@ -42,11 +42,12 @@ public class Movement : MonoBehaviour
     // Vector2 currentMouseDelta;
     // Vector2 currentMouseDeltaVelocity;
 
-    CharacterController controller;
-    Vector2 currentDir;
-    Vector2 currentDirVelocity;
-    Vector3 velocity;
+    CharacterController controller; // Ссылка на CharacterController
+    Vector2 currentDir; // Текущее направление движения
+    Vector2 currentDirVelocity; // Скорость сглаживания направления движения
+    Vector3 velocity; // Текущая скорость движения
 
+    // Инициализация компонентов и параметров при старте
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -64,12 +65,13 @@ public class Movement : MonoBehaviour
 
     }
 
+    // Обновление состояния персонажа
     void Update()
     {
         //UpdateMouse();
-        UpdateMove();
-        Run();
-        Crouch();
+        UpdateMove(); // Обновление движения
+        Run(); // Управление бегом
+        Crouch(); // Управление приседанием
     }
 
     // void UpdateMouse()
@@ -89,35 +91,43 @@ public class Movement : MonoBehaviour
 
     void UpdateMove()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, ground);
+        // Проверка на землю
+        bool isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, ground);
 
+        // Получение ввода для направления движения 
         Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         targetDir.Normalize();
 
+        // Сглаживание направления движения
         currentDir = Vector2.SmoothDamp(currentDir, targetDir, ref currentDirVelocity, moveSmoothTime);
 
+        // Применение гравитации
         velocityY += gravity * 2f * Time.deltaTime;
 
-        // Измените вектор скорости, чтобы учитывать состояние бега
+        // Определение текущей скорости перемещения (бег/ходьба)
         float currentSpeed = isRunning ? runSpeed : Speed;
 
-
+        // Вычисление вектора движения
         Vector3 moveDirection = transform.forward * currentDir.y + transform.right * currentDir.x;
         velocity = moveDirection * currentSpeed + Vector3.up * velocityY;
 
+        // Применение движение к контроллеру персонажа
         controller.Move(velocity * Time.deltaTime);
 
+        // Прыжок
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             velocityY = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
+        // Установка скорости падения при падении с высоты
         if (isGrounded! && controller.velocity.y < -1f)
         {
             velocityY = -8f * Time.deltaTime;
         }
     }
 
+    // Управление бегом
    void  Run()
     {
         // Получите ввод с клавиатуры для бега
@@ -144,7 +154,7 @@ public class Movement : MonoBehaviour
             Speed = 2f; // Делает в итоге скорость 2
         }
 
-        // Реализация задержки перед началом восстановления выносливости с использованием корутины.
+        // Восстановелние выносливости и скорости после бега 
         if (!runInput && !isRunning && stamina.playerStamina < stamina.maxStamina)
         {
             stamina.playerStamina += 0.1f;
@@ -162,6 +172,7 @@ public class Movement : MonoBehaviour
 
     void Crouch()
     {
+        // Переключение приседание при нажатии клавиши
         if (Input.GetKeyDown(KeyCode.C))
         {
             isCrouching = !isCrouching;

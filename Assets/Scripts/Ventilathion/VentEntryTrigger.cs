@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
+using System.Collections;
 
 public class VentEntryTrigger : MonoBehaviour
 {
-    public Transform ventCameraPosition; // ѕозици€ камеры в вентил€ции
+    private Transform ventCameraPosition; // ѕозици€ камеры в вентил€ции
     public GameObject playerBody; // “ело игрока
     public Animator playerAnimator; // јниматор тела игрока
     public KeyCode enterVentKey = KeyCode.E; //  лавиша дл€ входа в вентил€цию
@@ -11,16 +13,24 @@ public class VentEntryTrigger : MonoBehaviour
     public float interactionDistance = 2f; // ƒистанци€ взаимодействи€ с вентил€цией
     public Camera playerCamera; //  амера игрока
 
+    public Transform[] ventEntryPoints; // ћассив точек входа в вентил€цию
+    public UnityEvent OnEnterVent; // —обытие дл€ сигнала о входе в вентил€цию
+
     private bool isTransitioning = false; // ‘лаг, указывающий, идет ли в данный момент процесс перемещени€ в вентил€цию
-    private float animationDuration = 3f; // ѕродолжительность анимации перемещени€ камеры
 
     private void Update()
     {
         // ѕровер€ем нажатие кнопки "E" и находимс€ ли мы в зоне взаимодействи€ с вентил€цией и смотрим ли мы на нее
         if (Input.GetKeyDown(enterVentKey) && !isTransitioning && CanEnterVent())
         {
-            // ѕлавное перемещение камеры в вентил€цию, если вентил€ци€ в данный момент не активна
-            SmoothCameraTransition();
+            // Ќайдем точку входа в вентил€цию, на которую смотрит игрок
+            Transform nearestEntryPoint = FindNearestEntryPoint();
+
+            if (nearestEntryPoint != null)
+            {
+                // ѕеремещение камеры в вентил€цию
+                StartCoroutine(TransitionToVent(nearestEntryPoint));
+            }
         }
     }
 
@@ -39,26 +49,53 @@ public class VentEntryTrigger : MonoBehaviour
         return false;
     }
 
-    private void SmoothCameraTransition()
+    private IEnumerator TransitionToVent(Transform entryPoint)
     {
         isTransitioning = true; // ”станавливаем флаг в true, чтобы предотвратить повторный запуск процесса
 
-        // «апускаем анимацию плавного перемещени€ камеры в вентил€цию
-        // Ёто может быть реализовано различными способами, например, с помощью аниматора или кода
+        // —охран€ем позицию камеры в вентил€ции
+        ventCameraPosition = entryPoint;
 
-        // ѕосле завершени€ анимации вызываем метод телепортации тела игрока
-        Invoke("TeleportPlayerBody", animationDuration);
-    }
-
-    private void TeleportPlayerBody()
-    {
-        // “елепортируем тело игрока к позиции камеры в вентил€ции
-        playerBody.transform.position = ventCameraPosition.position;
-        playerBody.transform.rotation = ventCameraPosition.rotation;
+        // ѕеремещаем игрока к выбранной точке входа в вентил€цию
+        CharacterController playerController = playerBody.GetComponent<CharacterController>();
+        if (playerController != null)
+        {
+            playerController.enabled = false; // ќтключаем CharacterController перед перемещением
+            playerBody.transform.position = ventCameraPosition.position;
+            playerBody.transform.rotation = ventCameraPosition.rotation;
+            playerController.enabled = true; // ¬ключаем CharacterController после перемещени€
+        }
 
         // јктивируем анимацию приседани€ тела игрока
         playerAnimator.SetBool("IsCrouching", true);
 
+        // ќтправл€ем сигнал о входе в вентил€цию
+        OnEnterVent.Invoke();
+
+        yield return null;
+
         isTransitioning = false; // —брасываем флаг, чтобы разрешить новый вход в вентил€цию
+    }
+
+    private Transform FindNearestEntryPoint()
+    {
+        Transform nearestEntryPoint = null;
+        float highestDotProduct = -Mathf.Infinity;
+        Vector3 playerDirection = playerCamera.transform.forward;
+
+        foreach (Transform entryPoint in ventEntryPoints)
+        {
+            Vector3 directionToEntryPoint = (entryPoint.position - playerCamera.transform.position).normalized;
+            float dotProduct = Vector3.Dot(playerDirection, directionToEntryPoint);
+
+            // ѕровер€ем, находитс€ ли точка входа в вентил€цию в поле зрени€ игрока
+            if (dotProduct > highestDotProduct)
+            {
+                highestDotProduct = dotProduct;
+                nearestEntryPoint = entryPoint;
+            }
+        }
+
+        return nearestEntryPoint;
     }
 }
