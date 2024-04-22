@@ -1,19 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class fleshlight : MonoBehaviour
 {
-    public Light spotL;
-    public Transform playerCamera;
-    public float delay = 0.1f;
-    public float smoothFactor = 5f;  // Параметр для определения, насколько плавным будет движение
+    public Light spotL; // Ссылка на компонент света фонарика
+    public Transform playerCamera; // Ссылка на позицию камеры игрока
+    public float delay = 0.1f; // Задержка между обновлениями позиции и вращения фонарика
+    public float smoothFactor = 5f; // Параметр для определения, насколько плавным будет движение
+
+    // Ссылка на скрипт управления батареей
+    public BatteryController batteryController;
 
     private void Start()
     {
-        StartCoroutine(RepeatCameraMovement());
+        StartCoroutine(RepeatCameraMovement()); // Запускаем корутину для обновления позиции и вращения фонарика
     }
 
+    // Корутина для повторяющегося обновления позиции и вращения фонарика
     private IEnumerator RepeatCameraMovement()
     {
         while (true)
@@ -23,11 +26,11 @@ public class fleshlight : MonoBehaviour
 
             yield return new WaitForSeconds(delay);
 
-            // Используем интерполяцию для плавного движения
             StartCoroutine(MoveSmoothly(currentCameraPosition, currentCameraRotation));
         }
     }
 
+    // Плавное движение фонарика к позиции и вращению камеры игрока
     private IEnumerator MoveSmoothly(Vector3 targetPosition, Quaternion targetRotation)
     {
         float elapsedTime = 0f;
@@ -50,12 +53,13 @@ public class fleshlight : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        // Если нажата клавиша F и батарея не пуста
+        if (Input.GetKeyDown(KeyCode.F) && batteryController.IsBatteryNotEmpty())
         {
-            spotL.enabled = !spotL.enabled;  // Используем оператор инверсии
+            spotL.enabled = !spotL.enabled; // Включаем или выключаем фонарик
         }
 
-        // Используем Quaternion.Slerp для плавного возвращения к взгляду игрока
+        // Плавно возвращаем фонарик к позиции игрока
         transform.rotation = Quaternion.Slerp(transform.rotation, playerCamera.rotation, Time.deltaTime * smoothFactor);
     }
 }
