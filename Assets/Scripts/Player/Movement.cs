@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
     [SerializeField] LayerMask ground; // Слой земли
     public AudioSource footstepsAudioSource; // Аудио для воспроизведения шагов
     public AudioSource runningAudioSource;// Аудио для воспроизведения Бега
+    
 
 
 
@@ -214,6 +215,8 @@ public class Movement : MonoBehaviour
         {
             Speed = 5f;
         }
+
+
     }
 
     IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration)

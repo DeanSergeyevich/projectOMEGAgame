@@ -53,7 +53,7 @@ public class BatteryController : MonoBehaviour
                 // Отключаем фонарь
                 flashlight.enabled = false;
                 // Выводим сообщение об этом
-                Debug.Log("Battery drained! Flashlight turned off.");
+                Debug.Log("Батарея разряжена! Фонарик выключен.");
             }
         }
     }
