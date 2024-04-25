@@ -20,6 +20,11 @@ public class Movement : MonoBehaviour
     [SerializeField] float runSpeed = 5f; // Скорость бега
     [SerializeField] Transform groundCheck;  // Точка для проверки земли
     [SerializeField] LayerMask ground; // Слой земли
+    public AudioSource footstepsAudioSource; // Аудио для воспроизведения шагов
+    public AudioSource runningAudioSource;// Аудио для воспроизведения Бега
+
+
+
 
     [Header("Crouch")]
     public float standingHeight = 2f; // Высота в стоячем положении
@@ -91,6 +96,7 @@ public class Movement : MonoBehaviour
 
     void UpdateMove()
     {
+        
         // Проверка на землю
         bool isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, ground);
 
@@ -125,6 +131,29 @@ public class Movement : MonoBehaviour
         {
             velocityY = -8f * Time.deltaTime;
         }
+
+        // Воспроизведение звуков шагов при ходьбе
+        if (isGrounded && currentDir.magnitude > 0.1f && !isRunning && !footstepsAudioSource.isPlaying)
+        {
+            footstepsAudioSource.Play();
+        }
+        // Воспроизведение звуков бега при беге
+        else if (isGrounded && currentDir.magnitude > 0.1f && isRunning && !runningAudioSource.isPlaying)
+        {
+            runningAudioSource.Play();
+        }
+
+        // Остановка звуков шагов при прекращении движения
+        if (currentDir.magnitude < 0.1f && footstepsAudioSource.isPlaying)
+        {
+            footstepsAudioSource.Stop();
+        }
+        // Остановка звуков бега при прекращении бега
+        if (!isRunning && runningAudioSource.isPlaying)
+        {
+            runningAudioSource.Stop();
+        }
+
     }
 
     // Управление бегом
@@ -168,6 +197,8 @@ public class Movement : MonoBehaviour
 
         // Ограничьте выносливость максимальным значением и минимальным значением 0.
         stamina.playerStamina = Mathf.Clamp(stamina.playerStamina, 0f, stamina.maxStamina);
+
+      
     }
 
     void Crouch()
@@ -183,6 +214,20 @@ public class Movement : MonoBehaviour
         {
             Speed = 5f;
         }
+    }
+
+    IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume;
     }
     //IEnumerator ChangeHeight(float targetHeight)
     //{
