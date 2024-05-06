@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class UseChecolda : MonoBehaviour
 {
-    public GameObject[] checoldas; // Массив щеколд
     public Camera playerCamera;
     public LayerMask interactChecolda;
     public float interactionDistance = 2f;
@@ -12,16 +11,15 @@ public class UseChecolda : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            foreach (GameObject checolda in checoldas)
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionDistance, interactChecolda))
             {
-                if (CanOpenChecolda(checolda))
+                GameObject checolda = hit.collider.gameObject;
+                Animator animator = checolda.GetComponent<Animator>();
+                if (animator != null && CanOpenChecolda(checolda))
                 {
-                    Animator animator = checolda.GetComponent<Animator>();
-                    if (animator != null)
-                    {
-                        bool isChecoldaUsed = animator.GetBool("isChecoldaUsed");
-                        animator.SetBool("isChecoldaUsed", !isChecoldaUsed);
-                    }
+                    bool isChecoldaUsed = animator.GetBool("isChecoldaUsed");
+                    animator.SetBool("isChecoldaUsed", !isChecoldaUsed);
                 }
             }
         }

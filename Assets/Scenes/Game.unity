@@ -3188,7 +3188,7 @@ Transform:
   m_GameObject: {fileID: 139150224}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9998136, z: -0, w: -0.019305203}
-  m_LocalPosition: {x: -24.994, y: 1.257, z: -15.078}
+  m_LocalPosition: {x: -24.9965, y: 1.257, z: -15.013}
   m_LocalScale: {x: 0.26638, y: 0.065897085, z: 0.05701864}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3206,8 +3206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba38355ca0cdc842967e40e49d5b7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checoldas:
-  - {fileID: 139150224}
   playerCamera: {fileID: 8903406538429710926}
   interactChecolda:
     serializedVersion: 2
@@ -5144,17 +5142,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7488fa863b6422847a11282b7728d204,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -70.566
+      value: -69.892
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7488fa863b6422847a11282b7728d204,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.081
+      value: 0.063
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7488fa863b6422847a11282b7728d204,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.042
+      value: 28.242
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7488fa863b6422847a11282b7728d204,
         type: 3}
@@ -8996,14 +8994,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba38355ca0cdc842967e40e49d5b7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checoldas:
-  - {fileID: 585870324}
   playerCamera: {fileID: 8903406538429710926}
   interactChecolda:
     serializedVersion: 2
     m_Bits: 256
   interactionDistance: 2
-  maxAngle: 4
+  maxAngle: 30
 --- !u!95 &585870330
 Animator:
   serializedVersion: 5
@@ -18796,9 +18792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba38355ca0cdc842967e40e49d5b7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checoldas:
-  - {fileID: 585870324}
-  - {fileID: 139150224}
   playerCamera: {fileID: 8903406538429710926}
   interactChecolda:
     serializedVersion: 2
