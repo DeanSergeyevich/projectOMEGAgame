@@ -6,6 +6,13 @@ public class Key : MonoBehaviour
 {
     public GameObject keyObject;
     private bool isPickedUp = false;
+    private InventoryManager inventoryManager; // Ссылка на скрипт управления инвентарём
+
+    void Start()
+    {
+        // Получаем ссылку на скрипт управления инвентарём
+        inventoryManager = FindObjectOfType<InventoryManager>();
+    }
 
     void Update()
     {
@@ -14,7 +21,14 @@ public class Key : MonoBehaviour
         {
             isPickedUp = true;
             keyObject.SetActive(false);
+            // Добавляем ключ в инвентарь
+            inventoryManager.AddItem(new Item { name = "Key" });
             Debug.Log("Key picked up!");
+        }
+        // Проверяем нажатие кнопки для использования ключа
+        if (isPickedUp && Input.GetKeyDown(KeyCode.U))
+        {
+            UseKey();
         }
     }
 
@@ -43,5 +57,15 @@ public class Key : MonoBehaviour
     {
         return isPickedUp;
     }
-}
 
+    // Метод для использования ключа
+    public void UseKey()
+    {
+        if (isPickedUp)
+        {
+            isPickedUp = false;
+            inventoryManager.RemoveItem(new Item { name = "Key" });
+            inventoryManager.RemoveKeySprite(); // Убираем спрайт ключа из инвентаря
+        }
+    }
+}

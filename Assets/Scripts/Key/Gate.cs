@@ -7,8 +7,15 @@ public class Gate : MonoBehaviour
 {
     public Animator gateAnimator; // Ссылка на компонент аниматора ворот
     public GameObject keyObject; // Ссылка на объект ключа
+    private InventoryManager inventoryManager; // Ссылка на скрипт управления инвентарем
 
     private bool isOpen = false;
+
+    void Start()
+    {
+        // Получаем ссылку на скрипт управления инвентарем
+        inventoryManager = FindObjectOfType<InventoryManager>();
+    }
 
     private void Update()
     {
@@ -17,6 +24,8 @@ public class Gate : MonoBehaviour
             isOpen = true;
             OpenGate();
             Debug.Log("Gate opened!");
+            // Удаляем ключ из инвентаря
+            inventoryManager.RemoveItem(new Item { name = "Key" });
         }
     }
 
