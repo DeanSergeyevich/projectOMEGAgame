@@ -7,10 +7,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [Header("Mouse")]
-    [SerializeField] Transform playerCamera;
-    //[SerializeField][Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
-    //[SerializeField] float mouseSensitivity = 3.5f;
-    [SerializeField] bool cursorLock = true;
+    [SerializeField] Transform playerCamera; // Камера игрока.
+    [SerializeField] bool cursorLock = true; // Флаг блокировки курсора.
 
     [Header("Movement")]
     [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f; // Время сглаживания движения
@@ -31,22 +29,19 @@ public class Movement : MonoBehaviour
     public float standingHeight = 2f; // Высота в стоячем положении
     public float crouchingHeight = 1f; // Высота в приседающем положении
     private bool isCrouching = false; // Флаг приседания
-    Animator animator; 
+    Animator animator;  // Аниматор для управления анимациями.
 
-    //[Header("Плавность приседания")]
-    //[SerializeField] float crouchSmoothSpeed = 2f; // Скорость изменения высоты при приседании
+
 
 
     [Header("Stamina")]
     private StaminaEnergy stamina; // Ссылка на компонент StaminaEnergy.
 
-    float velocityY;
-    bool isGrounded;
-    bool isRunning;
+    float velocityY; // Скорость падения.
+    bool isGrounded; // Флаг нахождения на земле.
+    bool isRunning; // Флаг бега.
 
-    // float cameraCap;
-    // Vector2 currentMouseDelta;
-    // Vector2 currentMouseDeltaVelocity;
+
 
     CharacterController controller; // Ссылка на CharacterController
     Vector2 currentDir; // Текущее направление движения
@@ -67,7 +62,7 @@ public class Movement : MonoBehaviour
             Cursor.visible = true;
         }
 
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); // Получение компонента Animator.
 
     }
 
@@ -80,21 +75,7 @@ public class Movement : MonoBehaviour
         Crouch(); // Управление приседанием
     }
 
-    // void UpdateMouse()
-    // {
-    //     Vector2 targetMouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
-    //     currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
-
-    //     cameraCap -= currentMouseDelta.y * mouseSensitivity;
-
-    //     cameraCap = Mathf.Clamp(cameraCap, -90.0f, 90.0f);
-
-    //     playerCamera.localEulerAngles = Vector3.right * cameraCap;
-
-    //     transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity);
-    // }
-
+   
     void UpdateMove()
     {
         
@@ -191,6 +172,7 @@ public class Movement : MonoBehaviour
             Speed = 5f; // При восстановлении  выравнивается нормальная скорость 5f
         }
 
+        // Восстановление выносливости при приседании.
         if (runInput && isCrouching && stamina.playerStamina < stamina.maxStamina)
         {
             stamina.playerStamina +=  0.1f;
@@ -202,6 +184,7 @@ public class Movement : MonoBehaviour
       
     }
 
+    // Управление приседанием.
     void Crouch()
     {
         // Переключение приседание при нажатии клавиши
@@ -219,6 +202,7 @@ public class Movement : MonoBehaviour
 
     }
 
+    // Метод для постепенного затухания звука.
     IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration)
     {
         float startVolume = audioSource.volume;
@@ -232,31 +216,5 @@ public class Movement : MonoBehaviour
         audioSource.Stop();
         audioSource.volume = startVolume;
     }
-    //IEnumerator ChangeHeight(float targetHeight)
-    //{
-    //    // Сохранить начальную высоту объекта
-    //    float initialHeight = transform.localScale.y;
-
-    //    // Инициализировать переменную для отслеживания прошедшего времени
-    //    float t = 0f;
-
-    //    // Цикл, который будет выполняться, пока не достигнута целевая высота
-    //    while (t < 1f)
-    //    {
-    //        // Увеличиваем переменную t с учетом скорости изменения высоты
-    //        t += Time.deltaTime * crouchSmoothSpeed;
-
-    //        // Вычислить новую высоту с использованием функции Lerp
-    //        float newHeight = Mathf.Lerp(initialHeight, targetHeight, t);
-
-    //        // Установить новое значение высоты объекта
-    //        transform.localScale = new Vector3(transform.localScale.x, newHeight, transform.localScale.z);
-
-    //        // Подождать до следующего кадра для достижения плавности
-    //        yield return null;
-    //    }
-
-    //    // Установить окончательное значение высоты объекта
-    //    transform.localScale = new Vector3(transform.localScale.x, targetHeight, transform.localScale.z);
-    //}
+  
 }

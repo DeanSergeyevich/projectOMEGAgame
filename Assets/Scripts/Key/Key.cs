@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    public GameObject keyObject;
-    private bool isPickedUp = false;
+    public GameObject keyObject; // Ссылка на объект ключа
+    private bool isPickedUp = false; // Флаг для отслеживания, взят ли ключ
     private InventoryManager inventoryManager; // Ссылка на скрипт управления инвентарём
 
     void Start()
@@ -20,7 +20,7 @@ public class Key : MonoBehaviour
         if (!isPickedUp && Input.GetKeyDown(KeyCode.E) && IsPlayerLookingAtKey() && IsPlayerNearKey())
         {
             isPickedUp = true;
-            keyObject.SetActive(false);
+            keyObject.SetActive(false); // Скрываем объект ключа
             // Добавляем ключ в инвентарь
             inventoryManager.AddItem(new Item { name = "Key" });
             Debug.Log("Key picked up!");
@@ -53,6 +53,7 @@ public class Key : MonoBehaviour
         return distance < 2f; //  расстояние, которое считается "рядом с ключом"
     }
 
+    // Метод для получения информации о взятом ключе
     public bool IsPickedUp()
     {
         return isPickedUp;
@@ -64,7 +65,7 @@ public class Key : MonoBehaviour
         if (isPickedUp)
         {
             isPickedUp = false;
-            inventoryManager.RemoveItem(new Item { name = "Key" });
+            inventoryManager.RemoveItem(new Item { name = "Key" }); // Удаляем ключ из инвентаря
             inventoryManager.RemoveKeySprite(); // Убираем спрайт ключа из инвентаря
         }
     }

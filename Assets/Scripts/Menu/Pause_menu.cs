@@ -7,20 +7,23 @@ using UnityEngine.UI;
 
 public class Pause_menu : MonoBehaviour
 {
-    public static bool GameIsPause = false;
-    public GameObject pauseMenuUI;
-    public GameObject gameUI;
+    public static bool GameIsPause = false; // Флаг для отслеживания состояния паузы
+    public GameObject pauseMenuUI; // Ссылка на UI паузы
+    public GameObject gameUI; // Ссылка на основной игровой UI
 
     void Start()
     {
-
+        // Начальная настройка
+        Resume();
     }
 
-    // Update is called once per frame
+    // Обновление вызывается один раз за кадр
     void Update()
     {
+        // Проверка нажатия клавиши Esc
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            // Если игра на паузе, возобновляем игру, иначе приостанавливаем
             if (GameIsPause)
             {
                 Resume();
@@ -32,28 +35,31 @@ public class Pause_menu : MonoBehaviour
         }
     }
 
+    // Метод для возобновления игры
     void Resume()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        pauseMenuUI.SetActive(false);
-        gameUI.SetActive(true);
-        Time.timeScale = 1f;
-        GameIsPause = false;
+        Cursor.lockState = CursorLockMode.Locked; // Блокировка курсора
+        pauseMenuUI.SetActive(false); // Скрытие меню паузы
+        gameUI.SetActive(true); // Отображение основного UI
+        Time.timeScale = 1f; // Установка нормального времени
+        GameIsPause = false; // Снятие флага паузы
     }
 
+    // Метод для приостановки игры
     void Pause()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        pauseMenuUI.SetActive(true);
-        gameUI.SetActive(false);
-        Time.timeScale = 0f;
-        GameIsPause = true;
+        Cursor.lockState = CursorLockMode.None; // Разблокировка курсора
+        Cursor.visible = true; // Отображение курсора
+        pauseMenuUI.SetActive(true); // Отображение меню паузы
+        gameUI.SetActive(false); // Скрытие основного UI
+        Time.timeScale = 0f; // Остановка времени
+        GameIsPause = true; // Установка флага паузы
     }
 
+    // Метод для выхода из игры
     public void QuitGame()
     {
-        Debug.Log("quit");
-        Application.Quit();
+        Debug.Log("quit"); // Вывод сообщения в консоль
+        Application.Quit();  // Завершение приложения
     }
 }

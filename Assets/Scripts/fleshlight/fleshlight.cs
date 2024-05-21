@@ -21,11 +21,13 @@ public class fleshlight : MonoBehaviour
     {
         while (true)
         {
+            // —охран€ем текущую позицию и вращение камеры
             Vector3 currentCameraPosition = playerCamera.position;
             Quaternion currentCameraRotation = playerCamera.rotation;
 
             yield return new WaitForSeconds(delay);
 
+            // «апускаем корутину дл€ плавного движени€ фонарика к позиции и вращению камеры
             StartCoroutine(MoveSmoothly(currentCameraPosition, currentCameraRotation));
         }
     }
@@ -39,7 +41,9 @@ public class fleshlight : MonoBehaviour
 
         while (elapsedTime < delay)
         {
+            // Ћинейна€ интерпол€ци€ позиции фонарика
             transform.position = Vector3.Lerp(startingPosition, targetPosition, elapsedTime / delay);
+            // —ферическа€ интерпол€ци€ вращени€ фонарика
             transform.rotation = Quaternion.Slerp(startingRotation, targetRotation, elapsedTime / delay);
 
             elapsedTime += Time.deltaTime;

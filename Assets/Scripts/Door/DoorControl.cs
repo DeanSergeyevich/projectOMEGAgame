@@ -2,31 +2,31 @@ using UnityEngine;
 
 public class DoorControl : MonoBehaviour
 {
-    private new HingeJoint hingeJoint;
-    private JointMotor initialMotor;
-    private Rigidbody rb;
+    private new HingeJoint hingeJoint; // Ссылка на компонент HingeJoint двери
+    private JointMotor initialMotor; // Начальные настройки мотора для сочления двери
+    private Rigidbody rb; // Ссылка на компонент Rigidbody двери
 
-    public float openSpeed = 100.0f;
-    public float rotationSensitivity = 2.0f;
-    public Camera playerCamera;
-    private bool isFrozen = false;
+    public float openSpeed = 100.0f; // Скорость открытия двери
+    public float rotationSensitivity = 2.0f; // Чувствительность к вращению двери
+    public Camera playerCamera; // Камера, используемая для рейкастинга
+    private bool isFrozen = false; // Флаг, указывающий, заморожена ли камера
 
     private void Start()
     {
-        hingeJoint = GetComponent<HingeJoint>();
-        rb = GetComponent<Rigidbody>();
-        initialMotor = hingeJoint.motor;
+        hingeJoint = GetComponent<HingeJoint>(); // Получение ссылки на компонент HingeJoint
+        rb = GetComponent<Rigidbody>(); // Получение ссылки на компонент Rigidbody
+        initialMotor = hingeJoint.motor; // Сохранение начальных настроек мотора
     }
 
     public void InteractDoor()
     {
-        float mouseX = Input.GetAxis("Mouse X");
+        float mouseX = Input.GetAxis("Mouse X"); // Получение значения оси X мыши
 
-        JointMotor motor = hingeJoint.motor;
-        motor.targetVelocity = -mouseX * openSpeed * rotationSensitivity;
-        hingeJoint.motor = motor;
+        JointMotor motor = hingeJoint.motor; // Получение текущего мотора двери
+        motor.targetVelocity = -mouseX * openSpeed * rotationSensitivity; // Установка целевой скорости мотора
+        hingeJoint.motor = motor; // Применение изменений к мотору
 
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition); // Создание луча из позиции мыши
         RaycastHit hit;
 
         // Выполняем Raycast с максимальным расстоянием maxRaycastDistance
@@ -37,8 +37,8 @@ public class DoorControl : MonoBehaviour
             // Проверяем тег объекта, с которым столкнулся луч
             if (hitObject.CompareTag("FreezeCamera"))
             {
-                isFrozen = !isFrozen;
-                playerCamera.GetComponent<CameraMovement>().enabled = !isFrozen;
+                isFrozen = !isFrozen; // Инвертируем значение флага заморозки
+                playerCamera.GetComponent<CameraMovement>().enabled = !isFrozen; // Включаем/выключаем движение камеры
             }
             else if (!hitObject.CompareTag("BoxCollider"))
             {
@@ -53,13 +53,13 @@ public class DoorControl : MonoBehaviour
         }
         else
         {
-            hingeJoint.motor = initialMotor;
+            hingeJoint.motor = initialMotor; // Если луч не столкнулся с объектом, восстанавливаем начальный мотор
         }
     }
 
     public void Frozen()
     {
-        isFrozen = false;
-        playerCamera.GetComponent<CameraMovement>().enabled = true;
+        isFrozen = false; // Снимаем заморозку камеры
+        playerCamera.GetComponent<CameraMovement>().enabled = true; // Включаем движение камеры
     }
 }

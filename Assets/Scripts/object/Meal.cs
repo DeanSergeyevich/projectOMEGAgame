@@ -8,17 +8,17 @@ public class Meal : MonoBehaviour
     private StaminaHunger stamina;
     public float eda = 30.0f;
 
-    // Start is called before the first frame update
+   
     void Start()
     {
         // Находим объект с компонентом StaminaHunger по его имени.
-        GameObject playerObject = GameObject.Find("Player"); // Замените "Player" на имя своего игрока.
+        GameObject playerObject = GameObject.Find("Player"); 
 
         // Получаем компонент StaminaHunger с найденного объекта.
         stamina = playerObject.GetComponent<StaminaHunger>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
 

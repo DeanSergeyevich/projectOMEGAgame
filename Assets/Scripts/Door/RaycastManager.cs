@@ -6,10 +6,10 @@ using UnityEngine;
 public class RaycastManager : MonoBehaviour
 {
 
-    public float interactionDistance;
-    public RaycastHit hit;
+    public float interactionDistance; // Расстояние, на котором будет срабатывать взаимодействие
+    public RaycastHit hit; // Структура для хранения информации о результате Raycast
 
-    // Start is called before the first frame update
+    
     void Start()
     {
 
@@ -17,15 +17,18 @@ public class RaycastManager : MonoBehaviour
 
     void Update()
     {
-        RaycastHit();
+        RaycastHit(); // Выполняем Raycast в каждом кадре
     }
 
-    // Update is called once per frame
+    
     public void RaycastHit()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        // Создаем луч, исходящий из позиции объекта в направлении вперед
+        Ray ray = new Ray(transform.position, transform.forward); 
+        // Отображаем луч в редакторе Unity для визуализации
         Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.yellow);
 
+        // Выполняем Raycast и проверяем, попал ли луч в какой-либо объект
         if (Physics.Raycast(ray, out hit, interactionDistance))
         {
            
@@ -33,11 +36,4 @@ public class RaycastManager : MonoBehaviour
         
     }
     
-    // public void Door()
-    // {
-    //     if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Door") && Input.GetMouseButtonDown(0))
-    //     {
-    //         Debug.Log("yes");
-    //     }
-    // }
 }

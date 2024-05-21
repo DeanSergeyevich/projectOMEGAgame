@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private new HingeJoint hingeJoint;
-    private JointMotor initialMotor;
+    private new HingeJoint hingeJoint; // Ссылка на компонент HingeJoint двери
+    private JointMotor initialMotor; // Начальные настройки мотора для сочленения двери
 
-    public float openSpeed = 100.0f;
-    public float rotationSensitivity = 2.0f;
-    public Camera playerCamera;
+    public float openSpeed = 100.0f; // Скорость открытия двери
+    public float rotationSensitivity = 2.0f; // Чувствительность к вращению двери
+    public Camera playerCamera; // Камера, используемая для рейкастинга
     public float interactionDistance = 3.0f; // Максимальное расстояние для взаимодействия с дверью
     private bool isInteracting = false; // Переменная для отслеживания состояния взаимодействия
 
-    // Start is called before the first frame update
+    
     void Start()
     {
-        hingeJoint = GetComponent<HingeJoint>();
-        initialMotor = hingeJoint.motor;
+        hingeJoint = GetComponent<HingeJoint>(); // Получаем ссылку на компонент HingeJoint
+        initialMotor = hingeJoint.motor; // Сохраняем начальные настройки мотора
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        InteractDoor();
+        InteractDoor(); // Вызываем метод для взаимодействия с дверью
     }
 
     public void CheckInteractionDistance()

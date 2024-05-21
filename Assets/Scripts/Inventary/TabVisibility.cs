@@ -8,6 +8,7 @@ public class TabVisibility : MonoBehaviour
     private Animator animator;
     private bool isPanelVisible = false;
     private InventoryManager inventoryManager; // Ссылка на скрипт управления инвентарем
+    
 
     // Start вызывается перед обновлением первого кадра
     void Start()
@@ -21,10 +22,14 @@ public class TabVisibility : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+           
+
             // Переключаем значение isVisible и запускаем соответствующую анимацию
             isPanelVisible = !isPanelVisible;
             animator.SetBool("isVisible", isPanelVisible);
+
         }
+
     }
 
     // Метод для вызова из других скриптов для переключения видимости инвентаря
