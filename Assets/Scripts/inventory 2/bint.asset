@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 006e6aac0cd84e249a43bad2350d0958, type: 3}
-  m_Name: bool
+  m_Name: bint
   m_EditorClassIdentifier: 
-  itemName: "\u0428\u0430\u0440"
+  itemName: "\u0411\u0438\u043D\u0442"
   itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
