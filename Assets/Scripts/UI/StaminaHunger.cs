@@ -40,7 +40,7 @@ public class StaminaHunger : MonoBehaviour
         playerHungerLastFrame = playerHunger; // Сохраняем текущее значение голода для использования в следующем кадре.
     }
 
-    void UpdateStamina()
+   public void UpdateStamina()
     {
         hungerProgressUI.fillAmount = playerHunger / maxHunger; // Обновляем заполняемость UI элемента в соответствии с текущим уровнем голода.
     }

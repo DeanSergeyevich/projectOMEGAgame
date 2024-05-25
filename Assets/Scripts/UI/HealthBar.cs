@@ -9,7 +9,6 @@ public class HealthBar : MonoBehaviour
     public float fill; // Заполнение полосы здоровья
     public GameObject gameOverScreen; // Ссылка на экран окончания игры
 
-
     // Инициализация объекта при запуске сцены
     private void Start()
     {
@@ -22,18 +21,26 @@ public class HealthBar : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T)) // Проверка нажатия клавиши T
         {
-            fill -= 1; // Уменьшение заполнения на единицу
-            if (fill <= 0)
-            {
-                EndGame(); // Вызов метода окончания игры при достижении нулевого заполнения
-            }
+            ChangeHealth(-1); // Уменьшение заполнения на единицу
         }
-        bar.fillAmount = fill/100f;   // Обновление отображения полосы здоровья
     }
+
+    // Метод для изменения уровня здоровья
+    public void ChangeHealth(float amount)
+    {
+        fill += amount; // Изменение заполнения
+        fill = Mathf.Clamp(fill, 0, 100); // Ограничение значения между 0 и 100
+        bar.fillAmount = fill / 100f; // Обновление отображения полосы здоровья
+
+        if (fill <= 0)
+        {
+            EndGame(); // Вызов метода окончания игры при достижении нулевого заполнения
+        }
+    }
+
     // Метод для завершения игры
     void EndGame()
     {
-       
         gameOverScreen.SetActive(true); // Отображение экрана окончания игры
         Time.timeScale = 0f; // Остановка времени (пауза)
     }

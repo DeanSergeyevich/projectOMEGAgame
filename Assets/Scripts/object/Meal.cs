@@ -4,31 +4,69 @@ using UnityEngine;
 
 public class Meal : MonoBehaviour
 {
-    // Объявление переменной для хранения ссылки на объект с компонентом StaminaHunger.
-    private StaminaHunger stamina;
-    public float eda = 30.0f;
+    public float eda = 30.0f; // Количество голода, которое восполняет этот объект еды.
+    public float interactionRange = 3.0f; // Дистанция взаимодействия.
+    private Camera playerCamera; // Ссылка на камеру игрока.
+    private StaminaHunger staminaHunger; // Ссылка на компонент StaminaHunger игрока.
 
-   
     void Start()
     {
-        // Находим объект с компонентом StaminaHunger по его имени.
-        GameObject playerObject = GameObject.Find("Player"); 
+        // Предполагаем, что у игрока есть основная камера.
+        playerCamera = Camera.main;
 
-        // Получаем компонент StaminaHunger с найденного объекта.
-        stamina = playerObject.GetComponent<StaminaHunger>();
+        // Находим объект игрока по имени "Player".
+        GameObject playerObject = GameObject.Find("Player");
+
+        // Получаем компонент StaminaHunger с найденного объекта игрока.
+        if (playerObject != null)
+        {
+            staminaHunger = playerObject.GetComponent<StaminaHunger>();
+            if (staminaHunger == null)
+            {
+                Debug.LogWarning("Не найден компонент StaminaHunger на объекте Player.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Не найден объект Player.");
+        }
     }
 
-    
     void Update()
     {
-
+        // Проверяем нажатие клавиши "E" каждый кадр.
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
     }
 
+    void Interact()
+    {
+        // Выполняем рейкастинг от позиции камеры игрока в направлении, в которое она смотрит.
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionRange))
+        {
+            // Проверяем, что объект, с которым столкнулся рейкаст, является этим объектом еды.
+            if (hit.collider.gameObject == gameObject)
+            {
+                // Если это так, вызываем метод Eda.
+                Eda();
+            }
+        }
+    }
+
+    // Метод для уменьшения голода.
     public void Eda()
     {
-        if (stamina != null)
+        if (staminaHunger != null)
         {
-            stamina.playerHunger -= eda;
+            // Уменьшаем уровень голода игрока на значение eda, не позволяя ему опуститься ниже 0.
+            staminaHunger.playerHunger = Mathf.Max(staminaHunger.playerHunger - eda, 0.0f);
+            // Обновляем UI после изменения голода.
+            staminaHunger.UpdateStamina();
+            // Уничтожаем объект еды после того, как он был съеден.
+            Destroy(gameObject);
         }
         else
         {

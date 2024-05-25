@@ -41111,7 +41111,7 @@ MonoBehaviour:
   startingBattery: 100
   drainRate: 0.9
   flashlight: {fileID: 388094883}
-  batteryIndicator: {fileID: 0}
+  batteryIndicator: {fileID: 114486174}
 --- !u!114 &1265350770
 MonoBehaviour:
   m_ObjectHideFlags: 0
