@@ -12,10 +12,10 @@ public class Movement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f; // Время сглаживания движения
-    [SerializeField] float Speed = 5.0f; // Базовая скорость перемещения
+    [SerializeField] float Speed = 3.0f; // Базовая скорость перемещения
     [SerializeField] float gravity = -30f; // Гравитация
     [SerializeField] float jumpHeight = 6f; // Высота прыжка
-    [SerializeField] float runSpeed = 5f; // Скорость бега
+    [SerializeField] float runSpeed = 4f; // Скорость бега
     [SerializeField] Transform groundCheck;  // Точка для проверки земли
     [SerializeField] LayerMask ground; // Слой земли
     public AudioSource footstepsAudioSource; // Аудио для воспроизведения шагов
@@ -169,7 +169,7 @@ public class Movement : MonoBehaviour
         if (!runInput && !isRunning && stamina.playerStamina < stamina.maxStamina)
         {
             stamina.playerStamina += 0.1f;
-            Speed = 5f; // При восстановлении  выравнивается нормальная скорость 5f
+            Speed = 3f; // При восстановлении  выравнивается нормальная скорость 5f
         }
 
         // Восстановление выносливости при приседании.
@@ -192,11 +192,11 @@ public class Movement : MonoBehaviour
         {
             isCrouching = !isCrouching;
             animator.SetBool("IsCrouching", isCrouching);
-            Speed = 3f;
+            Speed = 2f;
         }
         else if (!isCrouching)
         {
-            Speed = 5f;
+            Speed = 3f;
         }
 
 
