@@ -19,6 +19,17 @@ public class MenuManager : MonoBehaviour
     {
         // Завершение приложения
         Application.Quit();
+
+        Debug.Log("Выход из игры");
+    }
+
+    // Метод для открытия панели настроек
+    public void OpenSettings()
+    {
+        // Активация панели настроек
+        settingsPanel.SetActive(true);
+
+        Debug.Log("Настройки открыты");
     }
 
     // Метод для закрытия панели настроек
@@ -27,4 +38,6 @@ public class MenuManager : MonoBehaviour
         // Деактивация панели настроек
         settingsPanel.SetActive(false);
     }
+
+
 }
