@@ -5,39 +5,34 @@ using UnityEngine.AI;
 
 public class NPCPatrol : MonoBehaviour
 {
-    // Массив точек маршрута, которые NPC будет патрулировать
-    public Transform[] waypoints;
-    // Индекс текущей точки маршрута
-    private int currentWaypointIndex = 0;
-    // Ссылка на компонент NavMeshAgent
-    public NavMeshAgent agent;
+    public Transform[] points; // Массив точек для патрулирования
+    private int destPoint = 0; // Индекс текущей точки назначения
+    private NavMeshAgent agent; // Ссылка на компонент NavMeshAgent
 
     void Start()
     {
-        // Получаем ссылку на компонент NavMeshAgent
-        agent = GetComponent<NavMeshAgent>();
-        // Отключаем автоматическое торможение перед точками маршрута
+        agent = GetComponent<NavMeshAgent>(); // Получаем ссылку на компонент NavMeshAgent
+
+        // Отключаем автоматическую остановку при достижении точки
         agent.autoBraking = false;
-        // Переходим к следующей точке маршрута
-        GotoNextWaypoint();
+
+        GotoNextPoint(); // Начинаем с первой точки
     }
 
-    void GotoNextWaypoint()
+    void GotoNextPoint()
     {
-        // Если нет точек маршрута, выходим из метода
-        if (waypoints.Length == 0)
-            return;
+        if (points.Length == 0)
+            return; // Выход из метода, если точки не заданы
 
-        // Устанавливаем следующую точку назначения
-        agent.destination = waypoints[currentWaypointIndex].position;
-        // Обновляем индекс текущей точки маршрута
-        currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+        // Устанавливаем случайную точку как цель
+        destPoint = Random.Range(0, points.Length);
+        agent.destination = points[destPoint].position;
     }
 
     void Update()
     {
-        // Если NPC достиг текущей точки маршрута, переходим к следующей
+        // Если агент достиг текущей точки, выбираем следующую
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
-            GotoNextWaypoint();
+            GotoNextPoint();
     }
 }

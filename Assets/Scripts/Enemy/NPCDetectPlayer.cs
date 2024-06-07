@@ -1,26 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class NPCDetectPlayer : MonoBehaviour
 {
     public Transform player; // Ссылка на трансформ игрока
-    public int damage = 15; // Уменьшенное количество урона, наносимого игроку
+    public int damage = 5; // Количество урона, наносимого игроку
     public float detectionRadius = 10f; // Радиус обнаружения игрока
     public float chaseRadius = 15f; // Радиус преследования игрока
     public float attackRadius = 1.5f; // Радиус атаки
-    public float attackInterval = 1f; // Интервал между атаками
+    public float attackInterval = 2f; // Интервал между атаками
 
     private float lastAttackTime; // Время последней атаки
     private NavMeshAgent agent; // Ссылка на компонент NavMeshAgent
     private NPCPatrol patrolScript; // Ссылка на скрипт патрулирования
     private bool isChasingPlayer = false; // Флаг преследования игрока
+    public Animator animator; // Ссылка на аниматор
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>(); // Получаем ссылку на компонент NavMeshAgent
         patrolScript = GetComponent<NPCPatrol>(); // Получаем ссылку на скрипт патрулирования
+        animator = GetComponent<Animator>(); // Получаем ссылку на аниматор
     }
 
     void Update()
@@ -34,11 +34,13 @@ public class NPCDetectPlayer : MonoBehaviour
         else if (distanceToPlayer < chaseRadius) // Если игрок в радиусе преследования, следуем за ним
         {
             agent.destination = player.position;
+            animator.SetBool("isWalking", true); // Запускаем анимацию ходьбы
         }
         else // Если игрок вне зоны преследования, возвращаемся к патрулированию
         {
             patrolScript.enabled = true;
             isChasingPlayer = false;
+            animator.SetBool("isWalking", false); // Останавливаем анимацию ходьбы
         }
 
         if (isChasingPlayer && distanceToPlayer <= attackRadius && Time.time - lastAttackTime >= attackInterval)
@@ -53,10 +55,12 @@ public class NPCDetectPlayer : MonoBehaviour
         patrolScript.enabled = false; // Отключаем патрулирование
         agent.destination = player.position; // Устанавливаем игрока как цель
         isChasingPlayer = true; // Устанавливаем флаг преследования
+        animator.SetBool("isWalking", true); // Запускаем анимацию ходьбы
     }
 
     void AttackPlayer()
     {
+        animator.SetTrigger("attack"); // Запускаем анимацию атаки
         HealthBar healthBar = player.GetComponent<HealthBar>(); // Получаем компонент здоровья игрока
         if (healthBar != null) // Если компонент здоровья найден, наносим урон
         {
