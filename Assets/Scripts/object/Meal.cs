@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Meal : MonoBehaviour
 {
+    public InventoryItem inventoryItem; // Предмет, который будет добавлен в инвентарь при использовании еды.
     public float eda = 30.0f; // Количество голода, которое восполняет этот объект еды.
     public float interactionRange = 3.0f; // Дистанция взаимодействия.
     private Camera playerCamera; // Ссылка на камеру игрока.
@@ -56,7 +57,7 @@ public class Meal : MonoBehaviour
         }
     }
 
-    // Метод для уменьшения голода.
+    // Метод для уменьшения голода и добавления еды в инвентарь.
     public void Eda()
     {
         if (staminaHunger != null)
@@ -65,6 +66,25 @@ public class Meal : MonoBehaviour
             staminaHunger.playerHunger = Mathf.Max(staminaHunger.playerHunger - eda, 0.0f);
             // Обновляем UI после изменения голода.
             staminaHunger.UpdateStamina();
+
+            // Добавляем предмет в инвентарь
+            if (inventoryItem != null)
+            {
+                Inventory inventory = FindObjectOfType<Inventory>(); // Получаем ссылку на инвентарь
+                if (inventory != null)
+                {
+                    inventory.AddItem(inventoryItem);
+                }
+                else
+                {
+                    Debug.LogWarning("Не найден объект Inventory.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Не задан предмет для добавления в инвентарь.");
+            }
+
             // Уничтожаем объект еды после того, как он был съеден.
             Destroy(gameObject);
         }

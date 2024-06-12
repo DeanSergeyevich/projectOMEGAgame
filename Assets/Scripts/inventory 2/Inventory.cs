@@ -20,9 +20,10 @@ public class Inventory : MonoBehaviour
     // Метод для использования предмета из инвентаря
     public void UseItem(InventoryItem itemToUse)
     {
-        // Здесь можно добавить логику для использования предмета
-        // Например, если предмет - зелье здоровья, можно восстановить здоровье игрока и т. д.
+        // Добавьте здесь логику использования предмета
+        Debug.Log("Использовано: " + itemToUse.itemName);
     }
+
 
     // Метод для получения массива предметов из инвентаря
     public List<InventoryItem> GetItemsList()
