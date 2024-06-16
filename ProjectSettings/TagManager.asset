@@ -8,6 +8,8 @@ TagManager:
   - BoxCollider
   - Pickupable
   - Enemy
+  - Generator
+  - Canister
   layers:
   - Default
   - TransparentFX

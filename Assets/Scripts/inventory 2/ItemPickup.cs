@@ -38,11 +38,11 @@ public class ItemPickup : MonoBehaviour
         // Проверяем, является ли объект едой
         if (item != null)
         {
-            // Если объект предмета, добавляем его в инвентарь и удаляем из сцены
+            // Если объект предмета, добавляем его в инвентарь
             inventory.AddItem(item);
             inventoryUI.UpdateInventoryUI(inventory.GetItemsList());
-            Destroy(gameObject);
             Debug.Log("Picked up: " + item.itemName); // Предполагается, что у предмета есть поле itemName
+            gameObject.SetActive(false); // Отключаем объект, чтобы он больше не отображался в мире
         }
     }
 }

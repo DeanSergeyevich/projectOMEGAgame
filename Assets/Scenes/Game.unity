@@ -6644,8 +6644,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIInventoryTaskPlayer: {fileID: 296502772}
+  animator: {fileID: 0}
   inventoryUI: {fileID: 0}
   inventory: {fileID: 0}
+  pauseDelay: 0.1
 --- !u!1 &301137042 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2319ba8c89af33544afc25452d1e0b8b,
@@ -18562,8 +18564,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIInventoryTaskPlayer: {fileID: 967197115}
+  animator: {fileID: 0}
   inventoryUI: {fileID: 967197117}
   inventory: {fileID: 8774415886289716359}
+  pauseDelay: 0.1
 --- !u!1 &972988243
 GameObject:
   m_ObjectHideFlags: 0
@@ -27540,6 +27544,7 @@ GameObject:
   - component: {fileID: 1512218126}
   - component: {fileID: 1512218125}
   - component: {fileID: 1512218124}
+  - component: {fileID: 1512218129}
   m_Layer: 0
   m_Name: Food
   m_TagString: Untagged
@@ -27559,6 +27564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f7bacd660919d41a63a65bdd6e1cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryItem: {fileID: 11400000, guid: 68c8f9428971d9941a1d4a0d30ba084d, type: 2}
   eda: 30
   interactionRange: 2
 --- !u!65 &1512218125
@@ -27647,6 +27653,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1512218129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512218123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4019606f43033e847a51aa725666de64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 68c8f9428971d9941a1d4a0d30ba084d, type: 2}
+  inventory: {fileID: 8774415886289716359}
+  inventoryUI: {fileID: 967197117}
 --- !u!1 &1512775942
 GameObject:
   m_ObjectHideFlags: 0
