@@ -923,7 +923,7 @@ GameObject:
   - component: {fileID: 18868633}
   - component: {fileID: 18868632}
   - component: {fileID: 18868631}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -15669,7 +15669,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 359870840}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundeCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16209,7 +16209,7 @@ GameObject:
   - component: {fileID: 388094883}
   - component: {fileID: 388094882}
   - component: {fileID: 388094881}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36487,8 +36487,9 @@ GameObject:
   - component: {fileID: 1006394311}
   - component: {fileID: 1006394310}
   - component: {fileID: 1006394309}
+  - component: {fileID: 1006394312}
   - component: {fileID: 1006394308}
-  m_Layer: 3
+  m_Layer: 11
   m_Name: lift
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36510,12 +36511,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9999999, y: 1.2886783, z: 1}
+  m_Center: {x: 0, y: 0.14433914, z: 0}
 --- !u!23 &1006394309
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36581,6 +36582,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 352762042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1006394312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006394307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8f98e3e6016a44a86993885bbb9c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1007508728
 GameObject:
   m_ObjectHideFlags: 0
@@ -45973,7 +45986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1264743932}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GravityAttractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46018,7 +46031,7 @@ GameObject:
   - component: {fileID: 1265350761}
   - component: {fileID: 1265350760}
   - component: {fileID: 1265350759}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -62352,11 +62365,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredCanisters: 4
-  canisters:
-  - {fileID: 1623547403}
-  - {fileID: 1672719442}
-  - {fileID: 1973519850}
-  - {fileID: 1852794104}
   lift: {fileID: 1006394307}
 --- !u!65 &1714207542
 BoxCollider:

@@ -1,11 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CanisterController : MonoBehaviour
 {
     private static bool isAnyCanisterTaken = false; // Переменная для отслеживания, взята ли хотя бы одна канистра
     public GameObject generator; // Ссылка на объект генератора
 
-    private void Update()
+    void Update()
     {
         // Проверяем, если кнопка E нажата и курсор наведен на канистру
         if (Input.GetKeyDown(KeyCode.E) && IsPlayerLookingAt() && !isAnyCanisterTaken)
@@ -40,7 +43,7 @@ public class CanisterController : MonoBehaviour
         // Уведомляем генератор о вставке канистры
         if (generator != null)
         {
-            generator.GetComponent<GeneratorController>().InsertCanister(gameObject); // Передаем объект канистры в метод InsertCanister
+            generator.GetComponent<GeneratorController>().PickUpCanister(gameObject); // Передаем объект канистры в метод PickUpCanister
         }
         else
         {

@@ -1,29 +1,22 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GeneratorController : MonoBehaviour
 {
-    public int requiredCanisters = 4;
-    public List<GameObject> canisters = new List<GameObject>(); // Список всех канистр в сцене
+    public int requiredCanisters = 4; // Количество требуемых канистр для запуска генератора
     private List<GameObject> insertedCanisters = new List<GameObject>(); // Список вставленных канистр
-    public GameObject lift;
+    public GameObject lift; // Ссылка на лифт
 
-    private void Start()
-    {
-        // Находим все канистры в сцене и добавляем их в список
-        GameObject[] allCanisters = GameObject.FindGameObjectsWithTag("Canister");
-        foreach (GameObject canister in allCanisters)
-        {
-            canisters.Add(canister);
-        }
-    }
+    private GameObject carriedCanister = null; // Текущая поднятая канистра
 
-    private void Update()
+    void Update()
     {
         // Проверяем, если кнопка E нажата и курсор наведен на генератор
-        if (Input.GetKeyDown(KeyCode.E) && IsPlayerLookingAtGenerator())
+        if (Input.GetKeyDown(KeyCode.E) && IsPlayerLookingAtGenerator() && carriedCanister != null)
         {
-            InsertCanister(gameObject); // Вставляем канистру в генератор
+            InsertCanister(); // Вставляем канистру в генератор
         }
     }
 
@@ -41,64 +34,48 @@ public class GeneratorController : MonoBehaviour
         return false;
     }
 
-    // Метод для вставки канистры в генератор
-    public void InsertCanister(GameObject gameObject)
+    // Метод для поднятия канистры игроком
+    public void PickUpCanister(GameObject canister)
     {
-        // Проверяем, что есть канистры для вставки
-        if (canisters.Count > 0)
+        carriedCanister = canister;
+    }
+
+    // Метод для вставки канистры в генератор
+    public void InsertCanister()
+    {
+        if (carriedCanister != null)
         {
-            GameObject canister = canisters[0]; // Берем первую доступную канистру
+            insertedCanisters.Add(carriedCanister); // Добавляем канистру в список вставленных
+            carriedCanister = null; // Сбрасываем текущую поднятую канистру
 
-            if (!insertedCanisters.Contains(canister))
+            Debug.Log("Канистра вставлена. Текущее количество: " + insertedCanisters.Count);
+
+            // Сбрасываем состояние канистры
+            CanisterController.ResetCanisterState();
+
+            // Если количество вставленных канистр достигло необходимого значения
+            if (insertedCanisters.Count == requiredCanisters)
             {
-                insertedCanisters.Add(canister); // Добавляем канистру в список вставленных
-                canisters.Remove(canister); // Удаляем канистру из списка всех канистр
-
-                Debug.Log("Канистра вставлена. Текущее количество: " + insertedCanisters.Count);
-
-                // Если количество вставленных канистр достигло необходимого значения
-                if (insertedCanisters.Count == requiredCanisters)
-                {
-                    Debug.Log("Генератор полностью заправлен! Запускаем...");
-                    ActivateGenerator(); // Вызываем метод активации генератора
-                }
+                Debug.Log("Генератор полностью заправлен! Запускаем...");
+                ActivateGenerator(); // Вызываем метод активации генератора
             }
-            else
-            {
-                Debug.LogWarning("Канистра уже вставлена в генератор!");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Нет доступных канистр для вставки!");
         }
     }
 
     // Метод для активации генератора и запуска лифта
     private void ActivateGenerator()
     {
-        // Активация генератора
         Debug.Log("Генератор активирован!");
 
         // Проверяем, что ссылка на лифт установлена
         if (lift != null)
         {
-            lift.SetActive(true); // Активируем лифт
+            lift.GetComponent<LiftController>().ActivateLift(); // Активируем лифт
             Debug.Log("Лифт активирован!");
         }
         else
         {
             Debug.LogError("Ссылка на лифт не установлена у генератора!");
-            return;
         }
-
-        // Выполняем переход на новый уровень (в следующую сцену)
-        LoadNextLevel();
-    }
-
-    // Метод для загрузки следующей сцены
-    private void LoadNextLevel()
-    {
-        // Здесь нужно добавить код для загрузки следующей сцены
     }
 }
