@@ -12,10 +12,10 @@ public class Movement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f; // Время сглаживания движения
-    [SerializeField] float Speed = 3.0f; // Базовая скорость перемещения
-    [SerializeField] float gravity = -30f; // Гравитация
-    [SerializeField] float jumpHeight = 6f; // Высота прыжка
-    [SerializeField] float runSpeed = 4f; // Скорость бега
+    [SerializeField] public float Speed = 3.0f; // Базовая скорость перемещения
+    [SerializeField] public float gravity = -30f; // Гравитация
+    [SerializeField] public float jumpHeight = 6f; // Высота прыжка
+    [SerializeField] public float runSpeed = 4f; // Скорость бега
     [SerializeField] Transform groundCheck;  // Точка для проверки земли
     [SerializeField] LayerMask ground; // Слой земли
     public AudioSource footstepsAudioSource; // Аудио для воспроизведения шагов
@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
 
 
     [Header("Stamina")]
-    private StaminaEnergy stamina; // Ссылка на компонент StaminaEnergy.
+    public StaminaEnergy stamina; // Ссылка на компонент StaminaEnergy.
 
     float velocityY; // Скорость падения.
     bool isGrounded; // Флаг нахождения на земле.

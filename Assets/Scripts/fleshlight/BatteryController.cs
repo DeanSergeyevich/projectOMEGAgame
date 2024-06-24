@@ -17,7 +17,7 @@ public class BatteryController : MonoBehaviour
     public Image batteryIndicator;
 
     // Текущий уровень заряда
-    private float currentBattery;
+    public float currentBattery;
 
     private void Start()
     {

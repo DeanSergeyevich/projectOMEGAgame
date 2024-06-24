@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
 {
     public Transform playerBody; // Ссылка на трансформ игрока.
     public Slider slider; // Слайдер для настройки чувствительности мыши.
-    [SerializeField][Range(0.0f, 500f)] float mouseSensitivity = 100f; // Чувствительность мыши.
+    [SerializeField][Range(0.0f, 500f)] public float mouseSensitivity = 100f; // Чувствительность мыши.
 
     private float cameraCap = 0f; // Ограничение по углу наклона камеры.
 
