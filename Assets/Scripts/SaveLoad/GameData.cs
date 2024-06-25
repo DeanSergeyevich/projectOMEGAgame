@@ -35,4 +35,14 @@ public class GameData
     // Данные врага
     public Vector3 enemyPosition;
     public Vector3 enemyRotation;
+
+    public GeneratorData[] generators; // Массив данных о генераторах
+    public bool[] canisters; // Массив данных о состоянии канистр (взята или нет)
+}
+
+// Класс для хранения данных о генераторах
+[System.Serializable]
+public class GeneratorData
+{
+    public int insertedCanistersCount; // Количество вставленных канистр
 }

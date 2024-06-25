@@ -56,4 +56,11 @@ public class CanisterController : MonoBehaviour
     {
         isAnyCanisterTaken = false; // Сбрасываем флаг при необходимости (например, при перезапуске уровня)
     }
+
+    // Метод для сброса состояния канистры
+    public void ResetCanister()
+    {
+        gameObject.SetActive(true);
+        CanisterController.ResetCanisterState();
+    }
 }

@@ -25,5 +25,11 @@ public class GameController : MonoBehaviour
         {
             saveLoadManager.LoadGame();
         }
+
+        // ¬ручную удалить сохранение при нажатии клавиши P
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            saveLoadManager.DeleteSave();
+        }
     }
 }

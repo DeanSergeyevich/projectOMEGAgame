@@ -78,4 +78,30 @@ public class GeneratorController : MonoBehaviour
             Debug.LogError("Ссылка на лифт не установлена у генератора!");
         }
     }
+
+    // Метод для получения количества вставленных канистр
+    public int GetInsertedCanistersCount()
+    {
+        return insertedCanisters.Count;
+    }
+
+    // Метод для установки количества вставленных канистр
+    public void SetInsertedCanisters(int count)
+    {
+        insertedCanisters.Clear(); // Очистка текущего списка канистр
+        for (int i = 0; i < count; i++)
+        {
+            // Воссоздайте или активируйте канистры и добавьте их в список insertedCanisters
+            GameObject newCanister = new GameObject("Canister" + (i + 1)); // Создайте новый объект канистры или получите существующий
+            insertedCanisters.Add(newCanister); // Добавьте его в список
+        }
+
+        Debug.Log("Генератор восстановлен с " + count + " канистрами.");
+    }
+
+    // Метод для сброса состояния генератора
+    public void ResetGenerator()
+    {
+        insertedCanisters.Clear();
+    }
 }
