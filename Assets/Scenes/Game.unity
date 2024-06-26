@@ -18739,7 +18739,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 61b591e6867d13843a921b5fbde67b77, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -18760,7 +18760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIInventoryTaskPlayer: {fileID: 967197115}
-  animator: {fileID: 0}
+  animator: {fileID: 967197118}
   inventoryUI: {fileID: 967197117}
   inventory: {fileID: 8774415886289716359}
   pauseDelay: 0.1

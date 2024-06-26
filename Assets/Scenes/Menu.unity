@@ -480,7 +480,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 361651535}
-  saveLoadManager: {fileID: 0}
 --- !u!1 &416621505
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +892,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 753978474}
-  saveLoadManager: {fileID: 0}
 --- !u!1 &876129236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 877003241}
-  saveLoadManager: {fileID: 0}
 --- !u!1 &958585437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,7 +1308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 0}
-  saveLoadManager: {fileID: 0}
 --- !u!1 &972394677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,7 +1590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 1035503403}
-  saveLoadManager: {fileID: 0}
 --- !u!1 &1096040600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,7 +1872,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 1161333904}
-  saveLoadManager: {fileID: 0}
 --- !u!1 &1227607729
 GameObject:
   m_ObjectHideFlags: 0

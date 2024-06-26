@@ -14,8 +14,16 @@ public class TabVisibility : MonoBehaviour
     // Start вызывается перед первым кадром
     void Start()
     {
-        // Получаем компонент Animator из объекта UIInventoryTaskPlayer
-        animator = UIInventoryTaskPlayer.GetComponent<Animator>();
+        // Проверяем, что компонент Animator получен корректно
+        if (UIInventoryTaskPlayer != null)
+        {
+            animator = UIInventoryTaskPlayer.GetComponent<Animator>();
+        }
+
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found on UIInventoryTaskPlayer.");
+        }
     }
 
     // Update вызывается один раз за кадр
@@ -70,6 +78,13 @@ public class TabVisibility : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay); // Ждем указанное количество секунд реального времени
         PauseGame(); // Останавливаем время
+    }
+
+    // Метод для возобновления времени в игре после задержки
+    private IEnumerator ResumeAfterDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay); // Ждем указанное количество секунд реального времени
+        ResumeGame(); // Возобновляем время
     }
 
     // Метод для остановки времени в игре
