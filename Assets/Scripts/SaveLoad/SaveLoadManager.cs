@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SaveLoadManager : MonoBehaviour
 {
-   // public CameraMovement cameraMovement; // Компонент управления движением камеры
+   
     public Movement movement; // Компонент управления движением игрока
     public BatteryController batteryController; // Компонент управления батареей
     public HealthBar healthBar; // Компонент управления здоровьем
@@ -124,7 +124,7 @@ public class SaveLoadManager : MonoBehaviour
                 GameData gameData = JsonUtility.FromJson<GameData>(json);
 
                 // Установка значений компонентов из загруженных данных
-              //  cameraMovement.mouseSensitivity = gameData.mouseSensitivity;
+             
                 movement.Speed = gameData.speed;
                 movement.jumpHeight = gameData.jumpHeight;
                 movement.runSpeed = gameData.runSpeed;

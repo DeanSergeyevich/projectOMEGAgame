@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Pause_menu : MonoBehaviour
@@ -59,7 +60,8 @@ public class Pause_menu : MonoBehaviour
     // Метод для выхода из игры
     public void QuitGame()
     {
+
+        SceneManager.LoadScene("Menu");
         Debug.Log("quit"); // Вывод сообщения в консоль
-        Application.Quit();  // Завершение приложения
     }
 }

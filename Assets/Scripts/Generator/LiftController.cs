@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class LiftController : MonoBehaviour
 {
+
+    public GameObject settingsPanel; // Ссылка на панель настроек в меню
     private bool generatorActivated = false;
 
     void OnTriggerEnter(Collider other)
@@ -25,7 +29,15 @@ public class LiftController : MonoBehaviour
     // Метод для загрузки следующей сцены
     private void LoadNextLevel()
     {
-        Debug.Log("Загрузка следующего уровня...");
-        SceneManager.LoadScene("Game");
+        Debug.Log("Загрузка EndGame...");
+        UnlockCursor();
+        SceneManager.LoadScene("EndGame");
+    }
+   
+    // Метод для разблокировки и отображения курсора
+    private void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

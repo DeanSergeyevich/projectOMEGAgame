@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rechargeAmount: 100
-  batteryController: {fileID: 0}
+  batteryController: {fileID: 430839894}
 --- !u!23 &4639661
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2219,7 +2219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &53520280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13778,7 +13778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rechargeAmount: 100
-  batteryController: {fileID: 0}
+  batteryController: {fileID: 430839894}
 --- !u!23 &343221868
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25153,7 +25153,7 @@ GameObject:
   - component: {fileID: 651686801}
   - component: {fileID: 651686800}
   m_Layer: 5
-  m_Name: Button
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36963,6 +36963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8f98e3e6016a44a86993885bbb9c8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsPanel: {fileID: 0}
 --- !u!1 &1007508728
 GameObject:
   m_ObjectHideFlags: 0
@@ -42507,7 +42508,7 @@ RectTransform:
   m_Father: {fileID: 1124661811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.02, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -47122,8 +47123,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 658027327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.02, y: 0}
-  m_AnchorMax: {x: 0.02, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -52644,7 +52645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1466432629
 RectTransform:
   m_ObjectHideFlags: 0
@@ -67860,7 +67861,7 @@ GameObject:
   - component: {fileID: 1892872615}
   - component: {fileID: 1892872616}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Slider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67939,7 +67940,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2126472177}
         m_TargetAssemblyTypeName: CameraMovement, Assembly-CSharp
         m_MethodName: Sensety
         m_Mode: 0

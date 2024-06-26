@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public GameObject settingsPanel; // Ссылка на панель настроек в меню
+    
+
+    
 
     // Метод для начала игры
     public void PlayGame() 
@@ -39,5 +42,15 @@ public class MenuManager : MonoBehaviour
         settingsPanel.SetActive(false);
     }
 
+    public void ExitInMenu()
+    {
+        // выход в меню
+        SceneManager.LoadScene("Menu");
+        Debug.Log("Выход в меню");
+    }
+
+    
+
+ 
 
 }
