@@ -8638,6 +8638,8 @@ GameObject:
   m_Component:
   - component: {fileID: 185722848}
   - component: {fileID: 185722849}
+  - component: {fileID: 185722850}
+  - component: {fileID: 185722851}
   m_Layer: 5
   m_Name: Inventary
   m_TagString: Untagged
@@ -8687,6 +8689,44 @@ MonoBehaviour:
   - {fileID: 733406208}
   - {fileID: 1533557354}
   - {fileID: 1011917701}
+--- !u!114 &185722850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185722847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7f244b22a589f48a3763a4a0eece89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIInventoryTaskPlayer: {fileID: 185722847}
+  animator: {fileID: 185722851}
+  inventoryUI: {fileID: 185722849}
+  inventory: {fileID: 430839895}
+  pauseDelay: 0.1
+--- !u!95 &185722851
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185722847}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 61b591e6867d13843a921b5fbde67b77, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &188086798
 GameObject:
   m_ObjectHideFlags: 0
