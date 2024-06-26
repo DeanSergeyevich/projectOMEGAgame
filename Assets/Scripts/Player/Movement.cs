@@ -69,7 +69,7 @@ public class Movement : MonoBehaviour
     // Обновление состояния персонажа
     void Update()
     {
-        //UpdateMouse();
+        
         UpdateMove(); // Обновление движения
         Run(); // Управление бегом
         Crouch(); // Управление приседанием

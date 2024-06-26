@@ -29,7 +29,7 @@ public class SaveLoadManager : MonoBehaviour
         if (!File.Exists(savePath))
         {
             SetDefaultValues();
-            SaveGame();
+            
         }
     }
 
